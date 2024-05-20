@@ -2,11 +2,58 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""The article model"""
-type GetCharacters {
-  content: String!
+type Character {
+  ability: String!
+  beerConsumption: Float!
+  born: DateTime!
+  gender: String
+  id: Float!
+  inSpaceSince: DateTime
+  knowsTheAnswer: Boolean!
+  minimalDistance: Float!
+  name: String!
+  nemeses: [Nemesis!]
+  weight: Float!
+}
+
+type CharactersStatistics {
+  averageAge: Float!
+  averageBeerConsumption: Float!
+  averageNemeses: Float!
+  averageYearsInSpace: Float!
+  averageYearsOfBeingNemesis: Float!
+  characterCount: Float!
+  genders: GenderStatistics!
+}
+
+type CharactersWithStats {
+  characters: [Character!]!
+  statistics: CharactersStatistics!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type GenderStatistics {
+  female: Float!
+  male: Float!
+  other: Float!
+}
+
+type Nemesis {
+  id: Float!
+  isAlive: Boolean!
+  secrets: [Secret!]
+  years: Float
 }
 
 type Query {
-  getCharacters: GetCharacters
+  getCharacters: CharactersWithStats!
+}
+
+type Secret {
+  id: Float!
+  secretCode: Int!
 }

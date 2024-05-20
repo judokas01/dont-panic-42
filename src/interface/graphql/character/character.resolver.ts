@@ -13,3 +13,44 @@ export class CharacterResolver {
         return toCharacterResponse(result)
     }
 }
+
+const gq = `
+query {
+    getCharacters {
+      characters {
+        ability
+        beerConsumption
+        born
+        gender
+        id
+        inSpaceSince
+        knowsTheAnswer
+        minimalDistance
+        name
+        weight
+        nemeses{
+          id
+          isAlive
+          secrets{
+            id
+            secretCode
+          }
+          years
+          
+        }
+      }
+      statistics{
+        averageAge
+        averageBeerConsumption
+        averageNemeses
+        averageYearsInSpace
+        averageYearsOfBeingNemesis
+        characterCount
+        genders{
+          female
+          male
+          other
+        }
+      }
+    }
+  }`

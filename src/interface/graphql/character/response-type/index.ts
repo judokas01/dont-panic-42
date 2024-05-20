@@ -1,12 +1,15 @@
-import { Field, ObjectType } from '@nestjs/graphql'
+import { Field, Int, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-export class CharactersWithStats {
-    @Field(() => CharactersStatistics)
-    statistics: CharactersStatistics
+export class GenderStatistics {
+    @Field()
+    male: number
 
-    @Field(() => [Character])
-    characters: Character[]
+    @Field()
+    female: number
+
+    @Field()
+    other: number
 }
 
 @ObjectType()
@@ -34,18 +37,6 @@ export class CharactersStatistics {
 }
 
 @ObjectType()
-export class GenderStatistics {
-    @Field()
-    male: number
-
-    @Field()
-    female: number
-
-    @Field()
-    other: number
-}
-
-@ObjectType()
 export class Character {
     @Field()
     id: number
@@ -54,7 +45,7 @@ export class Character {
     name: string
 
     @Field(() => String, { nullable: true })
-    gender?: string
+    gender: string | null
 
     @Field()
     ability: string
@@ -90,10 +81,10 @@ export class Nemesis {
     isAlive: boolean
 
     @Field(() => Number, { nullable: true })
-    years?: number
+    years: number | null
 
-    @Field(() => Secret, { nullable: true })
-    secrets: string
+    @Field(() => [Secret], { nullable: true })
+    secrets: Secret[] | null
 }
 
 @ObjectType()
@@ -101,6 +92,15 @@ export class Secret {
     @Field()
     id: number
 
-    @Field()
+    @Field(() => Int)
     secretCode: bigint
+}
+
+@ObjectType()
+export class CharactersWithStats {
+    @Field(() => CharactersStatistics)
+    statistics: CharactersStatistics
+
+    @Field(() => [Character])
+    characters: Character[]
 }
