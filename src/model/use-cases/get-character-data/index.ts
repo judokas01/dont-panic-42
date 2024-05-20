@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
+import { isFemale, isMale } from './lib/genders'
 import { Character } from '@root/model/entities/character'
-import { Nemesis } from '@root/model/entities/nemesis'
 import { CharacterRepository } from '@root/model/repositories/character'
 
 @Injectable()
@@ -11,7 +11,6 @@ export class GetCharactersDataUseCase {
         const allCharacters = await this.characterRepository.findAll()
 
         const characterCount = allCharacters.length
-        console.log({ allCharacters: allCharacters.map((e) => e.data) })
 
         const stats: CharacterStats = {
             characterCount,
@@ -20,9 +19,13 @@ export class GetCharactersDataUseCase {
             averageYearsInSpace: this.getAverageYearsInSpace(allCharacters),
             averageNemeses: this.getNemesisCount(allCharacters),
             averageYearsOfBeingNemesis: this.getAverageTimeOfBeingNemesis(allCharacters),
+            genders: this.getGenderStats(allCharacters),
         }
 
-        console.log({ stats })
+        return {
+            characters: allCharacters,
+            stats,
+        }
     }
 
     private getAverageAge = (characters: Character[]) => {
@@ -53,7 +56,24 @@ export class GetCharactersDataUseCase {
     }
 
     private getGenderStats = (characters: Character[]): CharacterStats['genders'] => {
-        new Map<CharacterStats['genders'], number>()
+        const genders: CharacterStats['genders'] = characters.reduce(
+            (acc, { data }) => {
+                if (isFemale(data.gender)) {
+                    return { ...acc, female: acc.female + 1 }
+                }
+                if (isMale(data.gender)) {
+                    return { ...acc, male: acc.male + 1 }
+                }
+                return { ...acc, other: acc.other + 1 }
+            },
+            {
+                male: 0,
+                female: 0,
+                other: 0,
+            },
+        )
+
+        return genders
     }
 }
 
