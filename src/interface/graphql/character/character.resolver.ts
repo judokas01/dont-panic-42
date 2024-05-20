@@ -1,15 +1,15 @@
 import { Query, Resolver } from '@nestjs/graphql'
-
-import { Character, GetCharacters } from './response-type'
+import { CharactersWithStats } from './response-type'
+import { toCharacterResponse } from './mappers'
 import { GetCharactersDataUseCase } from '@root/model/use-cases/get-character-data'
 
-@Resolver(() => Character)
+@Resolver(() => CharactersWithStats)
 export class CharacterResolver {
     constructor(private getCharactersUseCase: GetCharactersDataUseCase) {}
 
-    @Query(() => GetCharacters, { nullable: true })
-    async getCharacters(): Promise<GetCharacters> {
-        await this.getCharactersUseCase.get()
-        return { content: '' }
+    @Query(() => CharactersWithStats)
+    async getCharacters(): Promise<CharactersWithStats> {
+        const result = await this.getCharactersUseCase.get()
+        return toCharacterResponse(result)
     }
 }

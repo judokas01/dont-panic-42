@@ -7,23 +7,23 @@ import { CharacterRepository } from '@root/model/repositories/character'
 export class GetCharactersDataUseCase {
     constructor(private characterRepository: CharacterRepository) {}
 
-    get = async () => {
-        const allCharacters = await this.characterRepository.findAll()
+    get = async (): Promise<CharactersResponse> => {
+        const characters = await this.characterRepository.findAll()
 
-        const characterCount = allCharacters.length
+        const characterCount = characters.length
 
         const stats: CharacterStats = {
             characterCount,
-            averageAge: this.getAverageAge(allCharacters),
-            averageBeerConsumption: this.getAverageBeerConsumption(allCharacters),
-            averageYearsInSpace: this.getAverageYearsInSpace(allCharacters),
-            averageNemeses: this.getNemesisCount(allCharacters),
-            averageYearsOfBeingNemesis: this.getAverageTimeOfBeingNemesis(allCharacters),
-            genders: this.getGenderStats(allCharacters),
+            averageAge: this.getAverageAge(characters),
+            averageBeerConsumption: this.getAverageBeerConsumption(characters),
+            averageYearsInSpace: this.getAverageYearsInSpace(characters),
+            averageNemeses: this.getNemesisCount(characters),
+            averageYearsOfBeingNemesis: this.getAverageTimeOfBeingNemesis(characters),
+            genders: this.getGenderStats(characters),
         }
 
         return {
-            characters: allCharacters,
+            characters,
             stats,
         }
     }

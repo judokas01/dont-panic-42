@@ -1,25 +1,106 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
 
-@ObjectType({ description: 'The article model' })
-export class Character {
-    @Field(() => ID)
-    id: string
+@ObjectType()
+export class CharactersWithStats {
+    @Field(() => CharactersStatistics)
+    statistics: CharactersStatistics
 
-    @Field()
-    perex: string
-
-    @Field()
-    title: string
-
-    @Field()
-    createdAt: Date
-
-    @Field()
-    authorUsername: string
+    @Field(() => [Character])
+    characters: Character[]
 }
 
-@ObjectType({ description: 'The article model' })
-export class GetCharacters {
+@ObjectType()
+export class CharactersStatistics {
     @Field()
-    content: string
+    characterCount: number
+
+    @Field()
+    averageAge: number
+
+    @Field()
+    averageYearsInSpace: number
+
+    @Field()
+    averageBeerConsumption: number
+
+    @Field(() => GenderStatistics)
+    genders: GenderStatistics
+
+    @Field()
+    averageNemeses: number
+
+    @Field()
+    averageYearsOfBeingNemesis: number
+}
+
+@ObjectType()
+export class GenderStatistics {
+    @Field()
+    male: number
+
+    @Field()
+    female: number
+
+    @Field()
+    other: number
+}
+
+@ObjectType()
+export class Character {
+    @Field()
+    id: number
+
+    @Field()
+    name: string
+
+    @Field(() => String, { nullable: true })
+    gender?: string
+
+    @Field()
+    ability: string
+
+    @Field()
+    minimalDistance: number
+
+    @Field()
+    weight: number
+
+    @Field()
+    born: Date
+
+    @Field(() => Date, { nullable: true })
+    inSpaceSince: Date | null
+
+    @Field()
+    beerConsumption: number
+
+    @Field()
+    knowsTheAnswer: boolean
+
+    @Field(() => [Nemesis], { nullable: true })
+    nemeses: Nemesis[]
+}
+
+@ObjectType()
+export class Nemesis {
+    @Field()
+    id: number
+
+    @Field()
+    isAlive: boolean
+
+    @Field(() => Number, { nullable: true })
+    years?: number
+
+    @Field(() => Secret, { nullable: true })
+    secrets: string
+}
+
+@ObjectType()
+export class Secret {
+    @Field()
+    id: number
+
+    @Field()
+    secretCode: bigint
 }
