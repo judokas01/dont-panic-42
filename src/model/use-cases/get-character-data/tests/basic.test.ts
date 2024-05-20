@@ -1,5 +1,5 @@
 import { describe, beforeAll, it, expect, beforeEach } from 'vitest'
-import { CharacterRepository } from '@root/model/repositories/repositories/character'
+import { CharacterRepository } from '@root/model/repositories/character'
 import { cleanDatabase, getTestingModule } from '@root/model/test-utils'
 import { GetCharactersDataUseCase } from '@root/model/use-cases/get-character-data'
 

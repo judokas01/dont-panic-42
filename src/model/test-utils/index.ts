@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing'
-import { CharacterRepository } from '../repositories/repositories/character'
+import { CharacterRepository } from '../repositories/character'
 import { GetCharactersDataUseCase } from '../use-cases/get-character-data'
 import { PrismaService } from '@root/infrastructure/prisma/client'
 

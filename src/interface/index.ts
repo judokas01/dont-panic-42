@@ -4,7 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { CharacterController } from './rest/character/character.controller'
 import { CharacterResolver } from './graphql/character/character.resolver'
 import { PrismaService } from '@root/infrastructure/prisma/client'
-import { CharacterRepository } from '@root/model/repositories/repositories/character'
+import { CharacterRepository } from '@root/model/repositories/character'
 import { GetCharactersDataUseCase } from '@root/model/use-cases/get-character-data'
 
 @Module({

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { CharacterRepository } from '@root/model/repositories/repositories/character'
+import { CharacterRepository } from '@root/model/repositories/character'
 
 @Injectable()
 export class GetCharactersDataUseCase {
