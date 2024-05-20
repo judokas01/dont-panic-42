@@ -19,7 +19,7 @@ export class Character implements Clonable<Character> {
     }
 
     get yearsInSpace(): number {
-        return this.diffInYears(new Date(), this.character.inSpaceSince)
+        return this.diffInYears(new Date(), this.character.inSpaceSince ?? new Date())
     }
 
     private diffInYears = (date1: Date, date2: Date): number => {
@@ -39,7 +39,7 @@ export type CharacterData = {
     minimalDistance: number
     weight: number
     born: Date
-    inSpaceSince: Date
+    inSpaceSince: Date | null
     beerConsumption: number
     knowsTheAnswer: boolean
     /**

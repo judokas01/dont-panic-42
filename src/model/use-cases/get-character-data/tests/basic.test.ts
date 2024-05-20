@@ -11,9 +11,9 @@ describe('Get characters use case base tests', () => {
         ;({ characterRepository, useCase } = await getTestingModule())
     })
 
-    beforeEach(async () => {
-        await cleanDatabase(characterRepository)
-    })
+    // beforeEach(async () => {
+    //     await cleanDatabase(characterRepository)
+    // })
 
     it('should insert one user and retrieve it', async () => {
         await useCase.get()

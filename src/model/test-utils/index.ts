@@ -5,7 +5,7 @@ import { PrismaService } from '@root/infrastructure/prisma/client'
 
 export const getTestingModule = async () => {
     const testingApp = await Test.createTestingModule({
-        providers: [GetCharactersDataUseCase, PrismaService],
+        providers: [GetCharactersDataUseCase, CharacterRepository, PrismaService],
     }).compile()
 
     return {

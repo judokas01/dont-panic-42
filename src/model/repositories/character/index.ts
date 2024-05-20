@@ -15,7 +15,12 @@ export class CharacterRepository {
     findAll = async (): Promise<Character[]> => {
         const found = await this.prisma.character.findMany({
             include: {
-                nemeses: true,
+                nemeses: {
+                    include: {
+                        character: true,
+                        secret: true,
+                    },
+                },
             },
         })
         return found.map(toCoreCharacter)

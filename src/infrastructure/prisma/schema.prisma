@@ -38,10 +38,3 @@ model secret {
   nemesis_id  Int
   nemesis     nemesis @relation(fields: [nemesis_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nemesis")
 }
-
-model user {
-  id        Int    @id(map: "PK_cace4a159ff9f2512dd42373760") @default(autoincrement())
-  firstName String @db.VarChar
-  lastName  String @db.VarChar
-  age       Int
-}
