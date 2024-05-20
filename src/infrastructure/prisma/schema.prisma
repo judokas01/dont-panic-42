@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model character {
+  id               Int       @id @default(autoincrement())
+  name             String
+  gender           String?
+  ability          String
+  minimal_distance Decimal   @db.Decimal
+  weight           Decimal?  @db.Decimal
+  born             DateTime  @db.Timestamp(6)
+  in_space_since   DateTime? @db.Timestamp(6)
+  beer_consumption Int
+  knows_the_answer Boolean
+  nemeses          nemesis[]
+}
+
+model nemesis {
+  is_alive     Boolean
+  years        Int?
+  id           Int        @id @default(autoincrement())
+  character_id Int?
+  character    character? @relation(fields: [character_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "character")
+  secret       secret[]
+
+  @@index([id], map: "fki_Character Id")
+}
+
+model secret {
+  id          Int     @id @default(autoincrement())
+  secret_code BigInt
+  nemesis_id  Int
+  nemesis     nemesis @relation(fields: [nemesis_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nemesis")
+}
+
+model user {
+  id        Int    @id(map: "PK_cace4a159ff9f2512dd42373760") @default(autoincrement())
+  firstName String @db.VarChar
+  lastName  String @db.VarChar
+  age       Int
+}

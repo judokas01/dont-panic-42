@@ -1,0 +1,12 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""The article model"""
+type GetCharacters {
+  content: String!
+}
+
+type Query {
+  getCharacters: GetCharacters
+}
