@@ -47,3 +47,5 @@ export type CharacterData = {
      */
     nemeses: HasMany<Nemesis>
 }
+
+export type CreateCharacterData = Omit<CharacterData, 'id' | 'nemeses'>

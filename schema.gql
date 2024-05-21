@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+scalar BigInt
+
 type Character {
   ability: String!
   beerConsumption: Float!
@@ -55,5 +60,5 @@ type Query {
 
 type Secret {
   id: Float!
-  secretCode: Int!
+  secretCode: BigInt!
 }

@@ -22,3 +22,5 @@ export type SecretData = {
     secretCode: bigint
     nemesis: HasOne<Nemesis>
 }
+
+export type CreateSecretData = Omit<SecretData, 'id'>

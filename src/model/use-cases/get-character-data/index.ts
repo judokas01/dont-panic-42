@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { isFemale, isMale } from './lib/genders'
+import { toTwoDecimals } from './lib/round'
 import { Character } from '@root/model/entities/character'
 import { CharacterRepository } from '@root/model/repositories/character'
 
@@ -14,11 +15,13 @@ export class GetCharactersDataUseCase {
 
         const stats: CharacterStats = {
             characterCount,
-            averageAge: this.getAverageAge(characters),
-            averageBeerConsumption: this.getAverageBeerConsumption(characters),
-            averageYearsInSpace: this.getAverageYearsInSpace(characters),
-            averageNemeses: this.getNemesisCount(characters),
-            averageYearsOfBeingNemesis: this.getAverageTimeOfBeingNemesis(characters),
+            averageAge: toTwoDecimals(this.getAverageAge(characters)),
+            averageBeerConsumption: toTwoDecimals(this.getAverageBeerConsumption(characters)),
+            averageYearsInSpace: toTwoDecimals(this.getAverageYearsInSpace(characters)),
+            averageNemeses: toTwoDecimals(this.getNemesisCount(characters)),
+            averageYearsOfBeingNemesis: toTwoDecimals(
+                this.getAverageTimeOfBeingNemesis(characters),
+            ),
             genders: this.getGenderStats(characters),
         }
 
@@ -29,18 +32,22 @@ export class GetCharactersDataUseCase {
     }
 
     private getAverageAge = (characters: Character[]) => {
+        if (!characters.length) return 0
         return characters.reduce((acc, e) => (acc += e.age), 0) / characters.length
     }
 
     private getAverageBeerConsumption = (characters: Character[]) => {
+        if (!characters.length) return 0
         return characters.reduce((acc, e) => (acc += e.data.beerConsumption), 0) / characters.length
     }
 
     private getAverageYearsInSpace = (characters: Character[]) => {
+        if (!characters.length) return 0
         return characters.reduce((acc, e) => (acc += e.yearsInSpace), 0) / characters.length
     }
 
     private getNemesisCount = (characters: Character[]) => {
+        if (!characters.length) return 0
         return (
             characters.reduce((acc, e) => (acc += e.data.nemeses.get().length), 0) /
             characters.length
@@ -48,6 +55,7 @@ export class GetCharactersDataUseCase {
     }
 
     private getAverageTimeOfBeingNemesis = (characters: Character[]) => {
+        if (!characters.length) return 0
         const sumOfNemesesYears = characters
             .flatMap((ch) => ch.data.nemeses.get())
             .reduce((acc, e) => (acc += e.data.years ?? 0), 0)

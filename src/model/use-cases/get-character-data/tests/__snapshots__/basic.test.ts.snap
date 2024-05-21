@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Get characters use case base tests > Statistics tests > should return all stats zero when no character exists 1`] = `
+{
+  "characters": [],
+  "stats": {
+    "averageAge": 0,
+    "averageBeerConsumption": 0,
+    "averageNemeses": 0,
+    "averageYearsInSpace": 0,
+    "averageYearsOfBeingNemesis": 0,
+    "characterCount": 0,
+    "genders": {
+      "female": 0,
+      "male": 0,
+      "other": 0,
+    },
+  },
+}
+`;

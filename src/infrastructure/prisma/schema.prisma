@@ -27,7 +27,7 @@ model nemesis {
   id           Int        @id @default(autoincrement())
   character_id Int?
   character    character? @relation(fields: [character_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "character")
-  secret       secret[]
+  secrets      secret[]
 
   @@index([id], map: "fki_Character Id")
 }

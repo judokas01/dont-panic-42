@@ -1,4 +1,5 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
+import { GraphQLBigInt } from 'graphql-scalars'
 
 @ObjectType()
 export class GenderStatistics {
@@ -92,7 +93,7 @@ export class Secret {
     @Field()
     id: number
 
-    @Field(() => Int)
+    @Field(() => GraphQLBigInt)
     secretCode: bigint
 }
 

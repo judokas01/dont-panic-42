@@ -25,3 +25,5 @@ export type NemesisData = {
     character: HasOne<Character>
     secrets: HasMany<Secret>
 }
+
+export type CreateNemesisData = Omit<NemesisData, 'id' | 'secrets'>
